@@ -1,4 +1,4 @@
-package com.devgames.games.entities;
+package com.devgames.entities;
 
 import java.util.Objects;
 
