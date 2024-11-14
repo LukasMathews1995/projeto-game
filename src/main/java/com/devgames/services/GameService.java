@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devgames.dto.GameDTO;
 import com.devgames.dto.GameMinDTO;
 import com.devgames.entities.Game;
+import com.devgames.projections.GameMinProjection;
 import com.devgames.repositories.GameRepository;
 
 
@@ -34,4 +35,14 @@ public class GameService {
 			return dto;
 			
 	} 
+	@Transactional(readOnly = true)
+	public List<GameMinDTO> findByList(Long listId) {
+		List<GameMinProjection> result = gameRepository.searchByList(listId);
+// stream - pega os itens da lista como : (Game(Lucas, ps5  , manete) ) e map transforma de uma coisa para outra e o ultimo transforma em list
+		List<GameMinDTO> dto = result.stream().map(x-> new GameMinDTO(x)).toList();
+		return dto;
+	}
+
+
+	
 }
